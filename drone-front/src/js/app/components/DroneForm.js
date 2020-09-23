@@ -11,7 +11,16 @@ export default()=>{
     // eslint-disable-next-line no-unused-vars
     const [state,dispatch] = useContext(DroneContext)
 
+    const droneData = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idDrone: idDrone.value, latitude: latitude.value, longitude: longitude.value
+        , temperaturaAr: temperaturaAr.value, umidadeAr: umidadeAr.value })
+    };
+
     const onSubmit = event =>{
+        fetch('http://127.0.0.1:8080/drones', droneData)
+        .then(response => response.json());
         event.preventDefault()
         dispatch({
             type: "ADD_DRONE",
