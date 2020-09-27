@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react'
 import {DroneContext} from '../store'
+import { Col, Form, FormGroup, Label, Input, CustomInput, Button } from 'reactstrap'
 
 export default()=>{
     const idDrone = useFormInput("")
@@ -30,38 +31,38 @@ export default()=>{
     }
 
     return (
-        <div id="drone-form">
-            <form onSubmit={onSubmit}>
-                <div className="form-group">
-                    <label>ID Drone:</label>
-                    <input {...idDrone} type="text" name="idDrone" placeholder="Id Drone" required autoFocus/>
-                </div>
-                <div className="form-group">
-                    <label>Latitude:</label>
-                    <input {...latitude} type="text" name="latitude" placeholder="Latitude" required />
-                </div>
-                <div className="form-group">
-                    <label>Longitude:</label>
-                    <input {...longitude} type="text" name="longitude" placeholder="Longitude" required />
-                </div>
-                <div className="form-group">
-                    <label>Temperatura do Ar:</label>
-                    <input {...temperaturaAr} type="text" name="temperaturaAr" placeholder="Temperatura do ar" required />
-                </div>
-                <div className="form-group">
-                    <label>Umidade do Ar:</label>
-                    <input {...umidadeAr} type="text" name="umidadeAr" placeholder="Umidade ar" required />
-                </div>
-                <div className="form-group">
-                <label>Ativar rastreamento?</label>
-                    <label>SIM</label>
-                    <input type="radio" name="optionRastreamento" value="sim"/>
-                    <label>NÃO</label>
-                    <input type="radio" name="optionRastreamento" value="nao"/>
-                    </div>
-                <button>Enviar</button>
-            </form>
-        </div>
+        <Col md="4">
+            <h3>Adicionar rastreamento</h3>
+            <Form onSubmit={onSubmit}>
+                <FormGroup>
+                    <Label>ID Drone:</Label>
+                    <Input {...idDrone} type="text" name="idDrone" placeholder="Id Drone" required autoFocus/>
+                </FormGroup>
+                <FormGroup>
+                    <Label>Latitude:</Label>
+                    <Input {...latitude} type="text" name="latitude" placeholder="Latitude" required />
+                </FormGroup>
+                <FormGroup>
+                    <Label>Longitude:</Label>
+                    <Input {...longitude} type="text" name="longitude" placeholder="Longitude" required />
+                </FormGroup>
+                <FormGroup>
+                    <Label>Temperatura do Ar:</Label>
+                    <Input {...temperaturaAr} type="text" name="temperaturaAr" placeholder="Temperatura do ar" required />
+                </FormGroup>
+                <FormGroup>
+                    <Label>Umidade do Ar:</Label>
+                    <Input {...umidadeAr} type="text" name="umidadeAr" placeholder="Umidade ar" required />
+                </FormGroup>
+                <FormGroup>
+                    <Label>Ativar rastreamento?</Label>
+                    <CustomInput type="radio" name="optionRastreamento" value="sim" label="Sim" />
+                    <CustomInput type="radio" name="optionRastreamento" value="nao" label="Não" />
+                </FormGroup>
+                <Button color="primary">Enviar</Button>
+            </Form>
+        </Col>
+        
     )
 
 }
