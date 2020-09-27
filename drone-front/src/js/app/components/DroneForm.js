@@ -19,14 +19,14 @@ export default()=>{
     };
 
     const onSubmit = event =>{
-        fetch('http://127.0.0.1:8080/drones', droneData)
-        .then(response => response.json());
         event.preventDefault()
         dispatch({
             type: "ADD_DRONE",
             payload:{idDrone: idDrone.value, latitude: latitude.value, longitude:longitude.value, 
                 temperaturaAr: temperaturaAr.value, umidadeAr: umidadeAr.value, ativarRastreamento:ativarRastreamento.value}
         })
+        fetch('http://127.0.0.1:8080/drones', droneData)
+        .then(response => response.json());
     }
 
     return (

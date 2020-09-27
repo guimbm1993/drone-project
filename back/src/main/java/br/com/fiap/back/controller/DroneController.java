@@ -17,7 +17,7 @@ public class DroneController {
 
     @PostMapping
     public @ResponseBody
-    ResponseEntity<?> addDrone(@RequestBody DroneDTO droneDTO){
+    ResponseEntity<?> addDrone(@RequestBody DroneDTO droneDTO) throws InterruptedException {
         producer.sendData(droneDTO);
         return ResponseEntity.ok().body("chamada feita");
     }

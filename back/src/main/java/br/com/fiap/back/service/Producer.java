@@ -4,6 +4,6 @@ import br.com.fiap.back.dto.DroneDTO;
 
 public interface Producer {
 
-    void sendData(DroneDTO droneDTO);
+    void sendData(DroneDTO droneDTO) throws InterruptedException;
 
 }
