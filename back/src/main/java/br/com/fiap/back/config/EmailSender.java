@@ -1,9 +1,5 @@
 package br.com.fiap.back.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -12,17 +8,13 @@ import java.util.Properties;
 
 public class EmailSender {
 
+    public static void send(String [] droneInfo){
 
-    @Autowired
-    private JavaMailSender javaMailSender;
+        System.out.println("Drone: " + droneInfo[0]+ "\r\n" + "Latitude: " + droneInfo[1]
+        + "\r\n" + "Longitude: " + droneInfo[2] + "\r\n" + "Temperatura: " + droneInfo[3]
+        + "\r\n" + "Umidade: " + droneInfo[4]);
 
-//    public static void send(String [] droneInfo){
-//
-//        System.out.println("Drone: " + droneInfo[0]+ "\r\n" + "Latitude: " + droneInfo[1]
-//        + "\r\n" + "Longitude: " + droneInfo[2] + "\r\n" + "Temperatura: " + droneInfo[3]
-//        + "\r\n" + "Umidade: " + droneInfo[4]);
-//
-//    }
+    }
 
     public static void sendEmail(Session session, String toEmail, String subject, String body) {
         try {
@@ -52,22 +44,22 @@ public class EmailSender {
         }
     }
 
-    public static void send(String[] droneInfo) {
-        System.out.println("SimpleEmail Start");
-
-        String smtpHostServer = "smtp.example.com";
-        String emailID = "email_me@example.com";
-
-        Properties props = System.getProperties();
-
-        props.put("mail.smtp.host", smtpHostServer);
-
-        Session session = Session.getInstance(props, null);
-
-        String email = "Drone: " + droneInfo[0]+ "\r\n" + "Latitude: " + droneInfo[1]
-        + "\r\n" + "Longitude: " + droneInfo[2] + "\r\n" + "Temperatura: " + droneInfo[3]
-        + "\r\n" + "Umidade: " + droneInfo[4];
-
-        EmailSender.sendEmail(session, emailID, "Informações do drone", email);
-    }
+//    public static void send(String[] droneInfo) {
+//        System.out.println("SimpleEmail Start");
+//
+//        String smtpHostServer = "smtp.example.com";
+//        String emailID = "email_me@example.com";
+//
+//        Properties props = System.getProperties();
+//
+//        props.put("mail.smtp.host", smtpHostServer);
+//
+//        Session session = Session.getInstance(props, null);
+//
+//        String email = "Drone: " + droneInfo[0]+ "\r\n" + "Latitude: " + droneInfo[1]
+//        + "\r\n" + "Longitude: " + droneInfo[2] + "\r\n" + "Temperatura: " + droneInfo[3]
+//        + "\r\n" + "Umidade: " + droneInfo[4];
+//
+//        EmailSender.sendEmail(session, emailID, "Informações do drone", email);
+//    }
 }
