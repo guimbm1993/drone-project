@@ -24,7 +24,7 @@ public class BackApplication {
 	}
 
 	@EventListener(ApplicationReadyEvent.class)
-	public void doSomethingAfterStartup() {
+	public void consumer() {
 
 		RabbitTemplate template = new RabbitTemplate(RabbitMQConfiguration.getConnection());
 
