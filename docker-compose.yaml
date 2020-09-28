@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  back:
+    build: back/.
+    ports:
+      - "8080:8080"
+  front:
+    build: drone-front/.
+    ports:
+      - "80:80"
+    depends_on: 
+      - back      
+
