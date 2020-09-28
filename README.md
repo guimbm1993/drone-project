@@ -16,7 +16,11 @@ Foi utlizada a topologia direta, para a qual foi criado um exchange, ao receber 
 O consumidor se conecta nesse único exchange e começa a consumir as informações, e testa as condições especificadas, que se violadas, são impressas no console as informações do drone.  
 
 ## Como executar ##
-Uma das maneiras de se executar o projeto, é ter instalado o docker compose, caso tenha instalado, execute o seguinte comando:
+Uma das maneiras de se executar o projeto, é ter instalado o docker compose, caso tenha instalado, gere o .jar do projeto back, acessando o diretório back e executando o seguinte comando:
+```
+mvn clean package -Dmaven.test.skip=true
+``` 
+Em seguida, volte ao diretório raiz do projeto e execute o seguinte comando:
 ```
 docker-compose up --build 
 ```
