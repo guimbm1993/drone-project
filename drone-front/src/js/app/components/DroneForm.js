@@ -8,7 +8,7 @@ export default()=>{
     const longitude = useFormInput("")
     const temperaturaAr = useFormInput("")
     const umidadeAr = useFormInput("")
-    const ativarRastreamento = true
+    const ativarRastreamento = useFormInput("")
     // eslint-disable-next-line no-unused-vars
     const [state,dispatch] = useContext(DroneContext)
 
@@ -40,24 +40,23 @@ export default()=>{
                 </FormGroup>
                 <FormGroup>
                     <Label>Latitude:</Label>
-                    <Input {...latitude} type="text" name="latitude" placeholder="Latitude" required />
+                    <Input {...latitude} type="number" name="latitude" min="-33" max="5" placeholder="Latitude" required />
                 </FormGroup>
                 <FormGroup>
                     <Label>Longitude:</Label>
-                    <Input {...longitude} type="text" name="longitude" placeholder="Longitude" required />
+                    <Input {...longitude} type="number" name="longitude" min="-73" max="-34" placeholder="Longitude" required />
                 </FormGroup>
                 <FormGroup>
                     <Label>Temperatura do Ar:</Label>
-                    <Input {...temperaturaAr} type="text" name="temperaturaAr" placeholder="Temperatura do ar" required />
+                    <Input {...temperaturaAr} type="number" name="temperaturaAr" min="-25" max="40" placeholder="Temperatura do ar" required />
                 </FormGroup>
                 <FormGroup>
                     <Label>Umidade do Ar:</Label>
-                    <Input {...umidadeAr} type="text" name="umidadeAr" placeholder="Umidade ar" required />
+                    <Input {...umidadeAr} type="number" name="umidadeAr" min="0" max="100" placeholder="Umidade ar" required />
                 </FormGroup>
                 <FormGroup>
-                    <Label>Ativar rastreamento?</Label>
-                    <CustomInput type="radio" name="optionRastreamento" value="sim" label="Sim" />
-                    <CustomInput type="radio" name="optionRastreamento" value="nao" label="Não" />
+                    <Label>Rastreamento</Label>
+                    <CustomInput {...ativarRastreamento} type="switch" name="optionRastreamento" label="Ativar rastreamento?" />
                 </FormGroup>
                 <Button color="primary">Enviar</Button>
             </Form>
