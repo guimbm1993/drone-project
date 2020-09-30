@@ -20,6 +20,13 @@ export default()=>{
     };
 
     const onSubmit = event =>{
+
+        if(document.getElementById('sim').checked){
+            ativarRastreamento.value = true
+        }else{
+            ativarRastreamento.value = false
+        }
+
         event.preventDefault()
         dispatch({
             type: "ADD_DRONE",
@@ -28,6 +35,14 @@ export default()=>{
         })
         fetch('http://127.0.0.1:8080/drones', droneData)
         .then(response => response.json());
+    }
+
+   const clickedYes = ()=>{
+        ativarRastreamento.value = true
+    }
+
+    const clickedNo = (f)=>{
+        ativarRastreamento.value = false
     }
 
     return (
@@ -40,11 +55,11 @@ export default()=>{
                 </FormGroup>
                 <FormGroup>
                     <Label>Latitude:</Label>
-                    <Input {...latitude} type="number" name="latitude" min="-33" max="5" placeholder="Latitude" required />
+                    <Input {...latitude} type="number" name="latitude"  placeholder="Latitude" required />
                 </FormGroup>
                 <FormGroup>
                     <Label>Longitude:</Label>
-                    <Input {...longitude} type="number" name="longitude" min="-73" max="-34" placeholder="Longitude" required />
+                    <Input {...longitude} type="number" name="longitude"  placeholder="Longitude" required />
                 </FormGroup>
                 <FormGroup>
                     <Label>Temperatura do Ar:</Label>
@@ -55,8 +70,12 @@ export default()=>{
                     <Input {...umidadeAr} type="number" name="umidadeAr" min="0" max="100" placeholder="Umidade ar" required />
                 </FormGroup>
                 <FormGroup>
-                    <Label>Rastreamento</Label>
-                    <CustomInput {...ativarRastreamento} type="switch" name="optionRastreamento" label="Ativar rastreamento?" />
+                    <Label>Ativar rastreamento</Label>
+                    <br></br>
+                    <input type="radio" id="sim" name="optionStar" value="true" onClick={clickedYes}/>
+                    <label>SIM</label><br></br>
+                    <input type="radio" id="nao" name="optionStar" value="false" onClick={clickedNo}/>
+                    <label>NÃO</label>
                 </FormGroup>
                 <Button color="primary">Enviar</Button>
             </Form>

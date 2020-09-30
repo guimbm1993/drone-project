@@ -12,7 +12,7 @@ export default()=>{
             <td>{drone.longitude}</td>
             <td>{drone.temperaturaAr}</td>
             <td>{drone.umidadeAr}</td>
-            <td><a target="_blank" href="https://www.google.com/maps/search/?api=1&query=47.5951518,-122.3316393">Ver</a></td>
+            <td><a target="_blank" href={"https://www.google.com/maps/search/?api=1&query="+drone.latitude+","+drone.longitude}>{drone.ativarRastreamento ? 'Ver localização' : ''}</a></td>
         </tr>
     )
     if (state.drones.length > 0) {
