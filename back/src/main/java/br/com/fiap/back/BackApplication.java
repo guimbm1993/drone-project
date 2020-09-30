@@ -37,7 +37,7 @@ public class BackApplication {
 				Integer umidade = Integer.parseInt(info[4]);
 				if(temperatura != null && umidade != null){
 					if((temperatura >= 35 || temperatura <= 0) || (umidade <= 15)){
-						EmailSender.send(info);
+						EmailSender.sendEmail(info);
 					}
 				}
 			} catch (NullPointerException ex){

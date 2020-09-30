@@ -8,58 +8,46 @@ import java.util.Properties;
 
 public class EmailSender {
 
-    public static void send(String [] droneInfo){
+    public static void send(String[] droneInfo) {
 
-        System.out.println("Drone: " + droneInfo[0]+ "\r\n" + "Latitude: " + droneInfo[1]
-        + "\r\n" + "Longitude: " + droneInfo[2] + "\r\n" + "Temperatura: " + droneInfo[3]
-        + "\r\n" + "Umidade: " + droneInfo[4]);
+        System.out.println("Drone: " + droneInfo[0] + "\r\n" + "Latitude: " + droneInfo[1]
+                + "\r\n" + "Longitude: " + droneInfo[2] + "\r\n" + "Temperatura: " + droneInfo[3]
+                + "\r\n" + "Umidade: " + droneInfo[4]);
 
     }
 
-    public static void sendEmail(Session session, String toEmail, String subject, String body) {
+    public static void sendEmail(String[] droneInfo) {
+        String to = "email do destinatário";
+        String from = "integrations37scj2@gmail.com";
+        String host = "smtp.gmail.com";
+        Properties properties = System.getProperties();
+
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", "465");
+        properties.put("mail.smtp.ssl.enable", "true");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.socketFactory.fallback", "true");
+
+        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("integrations37scj2@gmail.com", "");
+            }
+        });
+
+        session.setDebug(true);
         try {
-            MimeMessage msg = new MimeMessage(session);
-            //set message headers
-            msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
-            msg.addHeader("format", "flowed");
-            msg.addHeader("Content-Transfer-Encoding", "8bit");
-
-            msg.setFrom(new InternetAddress("no_reply@example.com", "NoReply-JD"));
-
-            msg.setReplyTo(InternetAddress.parse("no_reply@example.com", false));
-
-            msg.setSubject(subject, "UTF-8");
-
-            msg.setText(body, "UTF-8");
-
-            msg.setSentDate(new Date());
-
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
-            System.out.println("Message is ready");
-            Transport.send(msg);
-
-            System.out.println("EMail Sent Successfully!!");
-        } catch (Exception e) {
-            e.printStackTrace();
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject("Informações sobre o Drone" + droneInfo[0]);
+            message.setText("Informações sobre o drone que quebrou condições " +
+                    "de temperatura ou umidade especificadas.\r\n"+ "Latitude: "+droneInfo[1]+"\r\n Longitude: "
+            + droneInfo[2]+ "\r\n" + "Temperatura: " + droneInfo[3] +"\r\n" + "Umidade: "+ droneInfo[4]);
+            Transport.send(message);
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
         }
     }
 
-//    public static void send(String[] droneInfo) {
-//        System.out.println("SimpleEmail Start");
-//
-//        String smtpHostServer = "smtp.example.com";
-//        String emailID = "email_me@example.com";
-//
-//        Properties props = System.getProperties();
-//
-//        props.put("mail.smtp.host", smtpHostServer);
-//
-//        Session session = Session.getInstance(props, null);
-//
-//        String email = "Drone: " + droneInfo[0]+ "\r\n" + "Latitude: " + droneInfo[1]
-//        + "\r\n" + "Longitude: " + droneInfo[2] + "\r\n" + "Temperatura: " + droneInfo[3]
-//        + "\r\n" + "Umidade: " + droneInfo[4];
-//
-//        EmailSender.sendEmail(session, emailID, "Informações do drone", email);
-//    }
+
 }
